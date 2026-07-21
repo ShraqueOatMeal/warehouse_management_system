@@ -1,0 +1,346 @@
+Connecting to live PostgreSQL database (`wms` on port 5433)...
+Database connection established successfully!
+
+Loading optimization master catalog (`optimization_master.csv`)...
+Loaded 3,640 master SKU records.
+
+Querying layout tables (`proposed_layout_coi`, `proposed_layout_ga`, `proposed_layout_sa`)...
+Loaded 1,715 COI rows, 1,115 GA rows, and 1,117 SA rows.
+
+
+========================================================================================
+  COI GREEDY (T1) — DETAILED METRIC EVALUATION REPORT
+========================================================================================
+
+	PLACEMENT CAPACITY & FEASIBILITY
+     ----------------------------------------------------------------------------------
+     Total Placed Inventory:        1,715 SKUs (out of 3,640 Master Catalog)
+     Overall System Coverage:       47.1%
+     Placement Feasibility Rate:    100.0% (assigned every active classified candidate)
+
+	ZONE DISTRIBUTION
+     ----------------------------------------------------------------------------------
+     INSIDE_STORAGE        :   850 items  ( 49.6% of total placed)
+     COLD_ROOM_MIX         :   468 items  ( 27.3% of total placed)
+     COLD_ROOM_HDL         :   320 items  ( 18.7% of total placed)
+     OUTSIDE               :    77 items  (  4.5% of total placed)
+
+	CATEGORY DISTRIBUTION
+     ----------------------------------------------------------------------------------
+
+     Classification (`Corrected for string-matching artifacts`):
+        - Food-Grade Products           :   801 items  ( 46.7%)
+        - Hazardous Chemicals           :   435 items  ( 25.4%)
+        - Sensitive Electronics         :   304 items  ( 17.7%)
+        - Packaging Materials           :   123 items  (  7.2%)
+        - General Merchandise           :    50 items  (  2.9%)
+        - Uniforms & PPE                :     1 items  (  0.1%)
+        - Warehouse Equipment & Crockery:     1 items  (  0.1%)
+
+	COLD ROOM PURITY, CATEGORY COMPLICATION & DRY GOODS
+     ----------------------------------------------------------------------------------
+     A. Product Category Breakdown Inside General Freezer (`COLD_ROOM_MIX` = 468 items):
+        [Classification]:
+           * Food-Grade Products     :  463 items ( 98.9%)
+           * Packaging Materials     :    5 items (  1.1%)
+        [Item Descriptions of General / Packaging / Non-Food Goods in `COLD_ROOM_MIX` (`5 items`)]:
+            1. SKU: 233050         | Description: ALUMINUM FOIL WHOLE CHICKEN BAG           
+            2. SKU: 233051         | Description: WHOLE CHICKEN BAG 4#                      
+            3. SKU: 232113         | Description: POPCORN CHICKEN BOX (OVERSEAS VERSION)    
+            4. SKU: DD065          | Description: SP 06006-SAUERKRAUT FISH GOLDEN SOUP // BOILED FISH WITH PICKLED CABBAGE
+            5. SKU: JPH518-036     | Description: SHIZUREN TIN FOIL CLAM POWDER 145G        
+
+     B. Product Category Breakdown Inside Dedicated Client Freezer (`COLD_ROOM_HDL` = 320 items):
+        [Classification]:
+           * Food-Grade Products     :  320 items (100.0%)
+
+     C. Master Catalog Zone Breakdown Inside General Freezer (`COLD_ROOM_MIX`):
+        - Master Zone: COLD_ROOM_MIX            :  111 items ( 23.7%)
+        - Master Zone: COLD_ROOM_HDL            :   33 items (  7.1%)
+        - Master Zone: OUTSIDE                  :   18 items (  3.8%)
+        - Master Zone: INSIDE_STORAGE           :    3 items (  0.6%)
+        - Master Zone: (Unassigned / Dry Pool)  :  303 items ( 64.7%)
+
+     D. Master Catalog Zone Breakdown Inside Dedicated Client Freezer (`COLD_ROOM_HDL`):
+        - Master Zone: COLD_ROOM_HDL            :   16 items (  5.0%)
+        - Master Zone: COLD_ROOM_MIX            :   55 items ( 17.2%)
+        - Master Zone: OUTSIDE                  :   10 items (  3.1%)
+        - Master Zone: INSIDE_STORAGE           :    0 items (  0.0%)
+        - Master Zone: (Unassigned / Dry Pool)  :  239 items ( 74.7%)
+
+     E. Overall Temperature Compliance & Contamination Summary:
+        - True Academic Chemical Contaminants in Freezers: 0 (`100% true chemical purity`)
+        - Sensitive Electronics in Freezers:              0 (`100% electronics purity`)
+        - True Master Cold Items Placed in Ambient:       0 items (`100% thermal compliance`)
+
+	TRAVEL DISTANCE EFFICIENCY
+     ----------------------------------------------------------------------------------
+     Average Travel Distance per Item:     32.45 meters
+     Median Travel Distance:               29.35 meters
+     Closest Placed Bay Distance:           3.80 meters
+     Farthest Placed Bay Distance:         73.25 meters
+     Total Cumulative Travel Distance:  55656.45 meters
+     Driving Distance Variation (Std):     18.42 meters
+
+     Per-Room Average Distance Breakdown:
+       COLD_ROOM_MIX       : avg=  0.00 m | sum=     0.00 m | share=  0.0% | count=468
+       OUTSIDE             : avg=  0.00 m | sum=     0.00 m | share=  0.0% | count=77
+       INSIDE_STORAGE      : avg=  0.00 m | sum=     0.00 m | share=  0.0% | count=850
+       COLD_ROOM_HDL       : avg=  0.00 m | sum=     0.00 m | share=  0.0% | count=320
+
+	SAFETY COMPLIANCE
+     ----------------------------------------------------------------------------------
+     Total 3-Meter Proximity Conflicts:     0 conflicts
+       - Inside Legacy Ambient Indoor Baseline (`INSIDE_STORAGE`):     0 conflicts
+       - Across All Newly Placed Freezer & Yard Slots:                 0 conflicts (`100% safe`)
+
+	 RACK LEVEL & HEAVY PALLET WEIGHT COMPLIANCE
+     ----------------------------------------------------------------------------------
+     Shelf Level 0 (Elevation y=0.0m):  1715 items  (100.0%)
+     Shelf Level 1 (Elevation y=1.6m):     0 items  (  0.0%)
+     Shelf Level 2 (Elevation y=3.2m):     0 items  (  0.0%)
+     Shelf Level 3 (Elevation y=4.8m):     0 items  (  0.0%)
+     Shelf Level 4 (Elevation y=6.4m):     0 items  (  0.0%)
+     ----------------------------------------------------------------------------------
+     Combined Lower Shelves (`Levels 0 & 1`):  1715 items  (100.0%)
+     Standard Lightweight Goods (< 500 kg):     579 items  (    7 lower | 572 upper)
+     Heavy Pallet Inventory (>= 500 kg):       1136 items  ( 1136 lower |     0 upper -> 0.0% on elevated tiers)
+
+========================================================================================
+  MEMETIC GA (T2) — DETAILED METRIC EVALUATION REPORT
+========================================================================================
+
+	PLACEMENT CAPACITY & FEASIBILITY
+     ----------------------------------------------------------------------------------
+     Total Placed Inventory:        1,115 SKUs (out of 3,640 Master Catalog)
+     Overall System Coverage:       30.6%
+     Placement Feasibility Rate:    100.0% (assigned every active classified candidate)
+
+	ZONE DISTRIBUTION
+     ----------------------------------------------------------------------------------
+     INSIDE_STORAGE        :   631 items  ( 56.6% of total placed)
+     COLD_ROOM_MIX         :   407 items  ( 36.5% of total placed)
+     COLD_ROOM_HDL         :     0 items  (  0.0% of total placed)
+     OUTSIDE               :    77 items  (  6.9% of total placed)
+
+	CATEGORY DISTRIBUTION
+     ----------------------------------------------------------------------------------
+
+     Classification (`Corrected for string-matching artifacts`):
+        - Food-Grade Products           :   439 items  ( 39.4%)
+        - Hazardous Chemicals           :   347 items  ( 31.1%)
+        - Sensitive Electronics         :   144 items  ( 12.9%)
+        - Packaging Materials           :    66 items  (  5.9%)
+        - General Merchandise           :   114 items  ( 10.2%)
+        - Uniforms & PPE                :     1 items  (  0.1%)
+        - Warehouse Equipment & Crockery:     4 items  (  0.4%)
+
+	COLD ROOM PURITY, CATEGORY COMPLICATION & DRY GOODS
+     ----------------------------------------------------------------------------------
+     A. Product Category Breakdown Inside General Freezer (`COLD_ROOM_MIX` = 407 items):
+        [Classification]:
+           * Food-Grade Products     :  403 items ( 99.0%)
+           * Packaging Materials     :    4 items (  1.0%)
+        [Item Descriptions of General / Packaging / Non-Food Goods in `COLD_ROOM_MIX` (`4 items`)]:
+            1. SKU: 233050         | Description: ALUMINUM FOIL WHOLE CHICKEN BAG           
+            2. SKU: 232113         | Description: POPCORN CHICKEN BOX (OVERSEAS VERSION)    
+            3. SKU: DD065          | Description: SP 06006-SAUERKRAUT FISH GOLDEN SOUP // BOILED FISH WITH PICKLED CABBAGE
+            4. SKU: JPH518-036     | Description: SHIZUREN TIN FOIL CLAM POWDER 145G        
+
+     B. Product Category Breakdown Inside Dedicated Client Freezer (`COLD_ROOM_HDL` = 0 items):
+        [Classification]:
+
+     C. Master Catalog Zone Breakdown Inside General Freezer (`COLD_ROOM_MIX`):
+        - Master Zone: COLD_ROOM_MIX            :   89 items ( 21.9%)
+        - Master Zone: COLD_ROOM_HDL            :   26 items (  6.4%)
+        - Master Zone: OUTSIDE                  :   14 items (  3.4%)
+        - Master Zone: INSIDE_STORAGE           :    2 items (  0.5%)
+        - Master Zone: (Unassigned / Dry Pool)  :  276 items ( 67.8%)
+
+     D. Master Catalog Zone Breakdown Inside Dedicated Client Freezer (`COLD_ROOM_HDL`):
+        - Master Zone: COLD_ROOM_HDL            :    0 items (  0.0%)
+        - Master Zone: COLD_ROOM_MIX            :    0 items (  0.0%)
+        - Master Zone: OUTSIDE                  :    0 items (  0.0%)
+        - Master Zone: INSIDE_STORAGE           :    0 items (  0.0%)
+        - Master Zone: (Unassigned / Dry Pool)  :    0 items (  0.0%)
+
+     E. Overall Temperature Compliance & Contamination Summary:
+        - True Academic Chemical Contaminants in Freezers: 0 (`100% true chemical purity`)
+        - Sensitive Electronics in Freezers:              0 (`100% electronics purity`)
+        - True Master Cold Items Placed in Ambient:       0 items (`100% thermal compliance`)
+
+	TRAVEL DISTANCE EFFICIENCY
+     ----------------------------------------------------------------------------------
+     Average Travel Distance per Item:     27.98 meters
+     Median Travel Distance:               21.93 meters
+     Closest Placed Bay Distance:           3.80 meters
+     Farthest Placed Bay Distance:         73.25 meters
+     Total Cumulative Travel Distance:  31199.37 meters
+     Driving Distance Variation (Std):     17.97 meters
+
+     Per-Room Average Distance Breakdown:
+       COLD_ROOM_MIX       : avg=  0.00 m | sum=     0.00 m | share=  0.0% | count=407
+       OUTSIDE             : avg=  0.00 m | sum=     0.00 m | share=  0.0% | count=77
+       INSIDE_STORAGE      : avg=  0.00 m | sum=     0.00 m | share=  0.0% | count=631
+       COLD_ROOM_HDL       : avg=  0.00 m | sum=     0.00 m | share=  0.0% | count=0
+
+	SAFETY COMPLIANCE
+     ----------------------------------------------------------------------------------
+     Total 3-Meter Proximity Conflicts:     0 conflicts
+       - Inside Legacy Ambient Indoor Baseline (`INSIDE_STORAGE`):     0 conflicts
+       - Across All Newly Placed Freezer & Yard Slots:                 0 conflicts (`100% safe`)
+
+	 RACK LEVEL & HEAVY PALLET WEIGHT COMPLIANCE
+     ----------------------------------------------------------------------------------
+     Shelf Level 0 (Elevation y=0.0m):  1115 items  (100.0%)
+     Shelf Level 1 (Elevation y=1.6m):     0 items  (  0.0%)
+     Shelf Level 2 (Elevation y=3.2m):     0 items  (  0.0%)
+     Shelf Level 3 (Elevation y=4.8m):     0 items  (  0.0%)
+     Shelf Level 4 (Elevation y=6.4m):     0 items  (  0.0%)
+     ----------------------------------------------------------------------------------
+     Combined Lower Shelves (`Levels 0 & 1`):  1115 items  (100.0%)
+     Standard Lightweight Goods (< 500 kg):     297 items  (    2 lower | 295 upper)
+     Heavy Pallet Inventory (>= 500 kg):        818 items  (  818 lower |     0 upper -> 0.0% on elevated tiers)
+
+========================================================================================
+  SIMULATED ANNEALING (T3) — DETAILED METRIC EVALUATION REPORT
+========================================================================================
+
+	PLACEMENT CAPACITY & FEASIBILITY
+     ----------------------------------------------------------------------------------
+     Total Placed Inventory:        1,117 SKUs (out of 3,640 Master Catalog)
+     Overall System Coverage:       30.7%
+     Placement Feasibility Rate:    100.0% (assigned every active classified candidate)
+
+	ZONE DISTRIBUTION
+     ----------------------------------------------------------------------------------
+     INSIDE_STORAGE        :   631 items  ( 56.5% of total placed)
+     COLD_ROOM_MIX         :   409 items  ( 36.6% of total placed)
+     COLD_ROOM_HDL         :     0 items  (  0.0% of total placed)
+     OUTSIDE               :    77 items  (  6.9% of total placed)
+
+	CATEGORY DISTRIBUTION
+     ----------------------------------------------------------------------------------
+
+     Classification (`Corrected for string-matching artifacts`):
+        - Food-Grade Products           :   437 items  ( 39.1%)
+        - Hazardous Chemicals           :   351 items  ( 31.4%)
+        - Sensitive Electronics         :   144 items  ( 12.9%)
+        - Packaging Materials           :    67 items  (  6.0%)
+        - General Merchandise           :   112 items  ( 10.0%)
+        - Uniforms & PPE                :     1 items  (  0.1%)
+        - Warehouse Equipment & Crockery:     5 items  (  0.4%)
+
+	COLD ROOM PURITY, CATEGORY COMPLICATION & DRY GOODS
+     ----------------------------------------------------------------------------------
+     A. Product Category Breakdown Inside General Freezer (`COLD_ROOM_MIX` = 409 items):
+        [Classification]:
+           * Food-Grade Products     :  401 items ( 98.0%)
+           * Packaging Materials     :    5 items (  1.2%)
+           * General Merchandise     :    2 items (  0.5%)
+           * Warehouse Equipment & Crockery:    1 items (  0.2%)
+        [Item Descriptions of General / Packaging / Non-Food Goods in `COLD_ROOM_MIX` (`10 items`)]:
+            1. SKU: 233050         | Description: ALUMINUM FOIL WHOLE CHICKEN BAG           
+            2. SKU: 232113         | Description: POPCORN CHICKEN BOX (OVERSEAS VERSION)    
+            3. SKU: BOILED FISH PICKLED | Description: BOILED FISH WITH PICKLED CABBAGE          
+            4. SKU: JPH518-036     | Description: SHIZUREN TIN FOIL CLAM POWDER 145G        
+            5. SKU: JPH518-033     | Description: (BUCKET) MASTER KONG OLD ALTAR PICKLED CABBAGE BEEF NOODLES,122G(12/CTN)
+            6. SKU: 231083         | Description: COLD CUP 16A                              
+            7. SKU: 51814          | Description: BELLY,SHEET RIBBED,SKIN ON,NATURAL CUT    
+            8. SKU: 31.06.000001997 | Description: THAI RE ICE CREAM POWDER                  
+            9. SKU: W018           | Description: PASSION PINEAPPLE JUICE                   
+           10. SKU: SAMPLE-CTN     | Description: SAMPLE                                    
+
+     B. Product Category Breakdown Inside Dedicated Client Freezer (`COLD_ROOM_HDL` = 0 items):
+        [Classification]:
+
+     C. Master Catalog Zone Breakdown Inside General Freezer (`COLD_ROOM_MIX`):
+        - Master Zone: COLD_ROOM_MIX            :   79 items ( 19.3%)
+        - Master Zone: COLD_ROOM_HDL            :   19 items (  4.6%)
+        - Master Zone: OUTSIDE                  :   39 items (  9.5%)
+        - Master Zone: INSIDE_STORAGE           :    2 items (  0.5%)
+        - Master Zone: (Unassigned / Dry Pool)  :  270 items ( 66.0%)
+
+     D. Master Catalog Zone Breakdown Inside Dedicated Client Freezer (`COLD_ROOM_HDL`):
+        - Master Zone: COLD_ROOM_HDL            :    0 items (  0.0%)
+        - Master Zone: COLD_ROOM_MIX            :    0 items (  0.0%)
+        - Master Zone: OUTSIDE                  :    0 items (  0.0%)
+        - Master Zone: INSIDE_STORAGE           :    0 items (  0.0%)
+        - Master Zone: (Unassigned / Dry Pool)  :    0 items (  0.0%)
+
+     E. Overall Temperature Compliance & Contamination Summary:
+        - True Academic Chemical Contaminants in Freezers: 0 (`100% true chemical purity`)
+        - Sensitive Electronics in Freezers:              0 (`100% electronics purity`)
+        - True Master Cold Items Placed in Ambient:       0 items (`100% thermal compliance`)
+
+	TRAVEL DISTANCE EFFICIENCY
+     ----------------------------------------------------------------------------------
+     Average Travel Distance per Item:     27.68 meters
+     Median Travel Distance:               21.36 meters
+     Closest Placed Bay Distance:           3.80 meters
+     Farthest Placed Bay Distance:         73.25 meters
+     Total Cumulative Travel Distance:  30917.11 meters
+     Driving Distance Variation (Std):     18.11 meters
+
+     Per-Room Average Distance Breakdown:
+       COLD_ROOM_MIX       : avg=  0.00 m | sum=     0.00 m | share=  0.0% | count=409
+       OUTSIDE             : avg=  0.00 m | sum=     0.00 m | share=  0.0% | count=77
+       INSIDE_STORAGE      : avg=  0.00 m | sum=     0.00 m | share=  0.0% | count=631
+       COLD_ROOM_HDL       : avg=  0.00 m | sum=     0.00 m | share=  0.0% | count=0
+
+	SAFETY COMPLIANCE
+     ----------------------------------------------------------------------------------
+     Total 3-Meter Proximity Conflicts:     0 conflicts
+       - Inside Legacy Ambient Indoor Baseline (`INSIDE_STORAGE`):     0 conflicts
+       - Across All Newly Placed Freezer & Yard Slots:                 0 conflicts (`100% safe`)
+
+	 RACK LEVEL & HEAVY PALLET WEIGHT COMPLIANCE
+     ----------------------------------------------------------------------------------
+     Shelf Level 0 (Elevation y=0.0m):  1117 items  (100.0%)
+     Shelf Level 1 (Elevation y=1.6m):     0 items  (  0.0%)
+     Shelf Level 2 (Elevation y=3.2m):     0 items  (  0.0%)
+     Shelf Level 3 (Elevation y=4.8m):     0 items  (  0.0%)
+     Shelf Level 4 (Elevation y=6.4m):     0 items  (  0.0%)
+     ----------------------------------------------------------------------------------
+     Combined Lower Shelves (`Levels 0 & 1`):  1117 items  (100.0%)
+     Standard Lightweight Goods (< 500 kg):     297 items  (    0 lower | 297 upper)
+     Heavy Pallet Inventory (>= 500 kg):        820 items  (  820 lower |     0 upper -> 0.0% on elevated tiers)
+
+===================================================================================================================
+  MASTER COMPARATIVE SYNTHESIS TABLE
+===================================================================================================================
+  Evaluated Performance Metric         |    COI Greedy (T1) |    Memetic GA (T2) |  Simulated Anneal (T3)
+  -------------------------------------+--------------------+--------------------+-----------------------
+  Total Placed Items (out of 3,640)    |              1,715 |              1,115 |                  1,117
+  System Catalog Coverage (%)          |              47.1% |              30.6% |                  30.7%
+  Placement Feasibility vs Pool        |             100.0% |             100.0% |                 100.0%
+  Average Travel Distance per Item     |            32.45 m |            27.98 m |                27.68 m
+  Median Travel Distance               |            29.35 m |            21.93 m |                21.36 m
+  Closest Placed Slot Distance         |             3.80 m |             3.80 m |                 3.80 m
+  Farthest Placed Slot Distance        |            73.25 m |            73.25 m |                73.25 m
+  Total Cumulative Travel Distance     |        55,656.45 m |        31,199.37 m |            30,917.11 m
+  Driving Distance Variation (Std)     |            18.42 m |            17.97 m |                18.11 m
+  Chemical Proximity Violations        |                  0 |                  0 |                      0
+  Violations across New Placements     |                  0 |                  0 |                      0
+  Freezer Chemical/Elec Contamination  |                  0 |                  0 |                      0
+  Cold Room Temperature Compliance     | 100.0% (0 ambient) | 100.0% (0 ambient) |     100.0% (0 ambient)
+  Dry Packaging/Gift Sets in Freezers  |          573 items |          292 items |              311 items
+  Lower Rack Utilization (`L0 & L1`)   |             100.0% |             100.0% |                 100.0%
+  Heavy Pallets on Elevated Racks      |               0.0% |               0.0% |                   0.0%
+  Execution Speed and Runtime          |      < 3.0 seconds |     4 to 6 minutes |         2 to 3 minutes
+===================================================================================================================
+
+===================================================================================================================
+  ZONE INVENTORY ALLOCATION COMPARISON
+===================================================================================================================
+  Warehouse Storage Room Name    |  COI Greedy (T1) |  Memetic GA (T2) |  Simulated Anneal (T3) | Net Shift vs T1
+  -------------------------------+------------------+------------------+------------------------+----------------
+  INSIDE_STORAGE                 |              850 |              631 |                    631 |   -219 (-25.8%)
+  COLD_ROOM_MIX                  |              468 |              407 |                    409 |    -61 (-13.0%)
+  OUTSIDE                        |               77 |               77 |                     77 |      +0 (+0.0%)
+  COLD_ROOM_HDL                  |              320 |                0 |                      0 |  -320 (-100.0%)
+  -------------------------------+------------------+------------------+------------------------+----------------
+  Total Stored Inventory         |            1,715 |            1,115 |                  1,117 |            -600
+===================================================================================================================
+
+Comprehensive metric evaluation script finished successfully!
