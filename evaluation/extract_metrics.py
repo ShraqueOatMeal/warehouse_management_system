@@ -38,8 +38,8 @@ def get_db_connection():
 
     pg_host = env.get("POSTGRES_HOST", "localhost")
     pg_port = env.get("POSTGRES_PORT", "5433")
-    pg_user = env.get("POSTGRES_USERNAME", "loh-yen-kuan")
-    pg_pass_raw = env.get("POSTGRES_PASSWORD", "Loh020518%21%40%23")
+    pg_user = env.get("POSTGRES_USERNAME", "")
+    pg_pass_raw = env.get("POSTGRES_PASSWORD", "")
     pg_pass = urllib.parse.unquote(pg_pass_raw)
     pg_db = env.get("POSTGRES_DATABASE", "wms")
 
